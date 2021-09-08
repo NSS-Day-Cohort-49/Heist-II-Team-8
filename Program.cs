@@ -10,13 +10,13 @@ namespace Heist_II
         {
             Bank Suntrust = new Bank
             {
-                AlarmScore =  new Random().Next(0, 101),
-                VaultScore =  new Random().Next(0, 101),
-                SecurityGuardScore =  new Random().Next(0, 101),
-                CashOnHand =  new Random().Next(50000, 1000001)
+                AlarmScore = new Random().Next(0, 101),
+                VaultScore = new Random().Next(0, 101),
+                SecurityGuardScore = new Random().Next(0, 101),
+                CashOnHand = new Random().Next(50000, 1000001)
             };
 
-            var bankProperities = new List<int>{Suntrust.AlarmScore, Suntrust.VaultScore, Suntrust.SecurityGuardScore};
+            var bankProperities = new List<int> { Suntrust.AlarmScore, Suntrust.VaultScore, Suntrust.SecurityGuardScore };
             void ReconReport()
             {
                 if (bankProperities.Max() == Suntrust.AlarmScore)
@@ -158,6 +158,29 @@ namespace Heist_II
                 Console.WriteLine($"{rolodex.Count}");
                 Console.WriteLine($"{Suntrust.AlarmScore}");
                 ReconReport();
+
+                foreach (IRobber robber in rolodex)
+                {
+                    Console.WriteLine(@$"{rolodex.IndexOf(robber)},{robber.Name}, {robber.Specialty}, {robber.SkillLevel}, {robber.PercentageCut}");
+                }
+
+                Console.WriteLine("Choose a Crew Member");
+                var ChosenMember = int.Parse(Console.ReadLine());
+                List<IRobber> Crew = new List<IRobber>()
+                { };
+
+                foreach (IRobber robber in rolodex)
+                {
+                    if (ChosenMember == rolodex.IndexOf(robber))
+                    {
+                        Crew.Add(robber);
+                    }
+                }
+                foreach (IRobber c in Crew)
+                {
+                    Console.WriteLine(@$"{Crew.IndexOf(c)},{c.Name}, {c.Specialty}, {c.SkillLevel}, {c.PercentageCut}");
+
+                }
                 PlayAgain();
             }
             void PlayAgain()
