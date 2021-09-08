@@ -4,13 +4,13 @@ namespace Heist_II
 {
     public class Bank
     {
-        public int CashOnHand { get; set; }
+        public int CashOnHand { get; set; } = 100;
 
-        public int AlarmScore { get; set; }
+        public int AlarmScore { get; set; } = 100;
 
-        public int VaultScore { get; set; }
+        public int VaultScore { get; set; }  = 100;
 
-        public int SecurityGuardScore { get; set; }
+        public int SecurityGuardScore { get; set; }  = 100;
 
         public bool IsSecure 
         { 
