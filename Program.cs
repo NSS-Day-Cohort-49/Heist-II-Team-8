@@ -54,10 +54,92 @@ namespace Heist_II
              Jon, Dan, Kurt, Kim, Tim, Lars
          };
 
-            Console.WriteLine($"{rolodex.Count}");
-            Console.WriteLine("Enter the name of the new member.");
-            var NewCrewMember = Console.ReadLine();
+            HeistTime();
 
+            void HeistTime()
+            {
+
+                Console.WriteLine($"{rolodex.Count}");
+                Console.WriteLine("Enter the name of the new member.");
+                var NewCrewMember = Console.ReadLine();
+
+                Console.WriteLine(@"
+                1. Hacker
+                2. Muscle
+                3.Lock Specialist");
+
+                var Specialty = int.Parse(Console.ReadLine());
+
+                var SpecialityChoice = new List<int>
+                {
+                    1, 2, 3
+                };
+
+                var SelectedChoice = SpecialityChoice[Specialty - 1];
+
+
+                Console.WriteLine("Choose a Skill level between 1 - 100");
+                var MemberSkillLevel = int.Parse(Console.ReadLine());
+                Console.WriteLine("Choose your percentage of the cut");
+                var MemberPercentCut = int.Parse(Console.ReadLine());
+
+                if (Specialty == 1)
+                {
+                    Hacker user = new Hacker
+                    {
+                        Name = NewCrewMember,
+                        SkillLevel = MemberSkillLevel,
+                        PercentageCut = MemberPercentCut
+                    };
+
+                    rolodex.Add(user);
+
+                }
+                else if (Specialty == 2)
+                {
+                    Muscle user = new Muscle
+                    {
+                        Name = NewCrewMember,
+                        SkillLevel = MemberSkillLevel,
+                        PercentageCut = MemberPercentCut
+                    };
+
+                    rolodex.Add(user);
+
+                }
+                else
+                {
+                    LockSpecialist user = new LockSpecialist
+                    {
+                        Name = NewCrewMember,
+                        SkillLevel = MemberSkillLevel,
+                        PercentageCut = MemberPercentCut
+                    };
+
+                    rolodex.Add(user);
+                }
+
+
+
+                Console.WriteLine($"{rolodex.Count}");
+
+                PlayAgain();
+            }
+            void PlayAgain()
+            {
+                Console.WriteLine("Would you like to add another crew member? Y/N");
+                string PlayAgain = Console.ReadLine();
+
+                if (PlayAgain == "y" || PlayAgain == "Y")
+                {
+                    HeistTime();
+                }
+                else
+                {
+                    Console.WriteLine("Well you suck then");
+                }
+
+            }
         }
     }
 }
