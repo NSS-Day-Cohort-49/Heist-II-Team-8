@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Heist_II
 {
@@ -7,10 +8,43 @@ namespace Heist_II
     {
         static void Main(string[] args)
         {
+            Bank Suntrust = new Bank
+            {
+                AlarmScore =  new Random().Next(0, 101),
+                VaultScore =  new Random().Next(0, 101),
+                SecurityGuardScore =  new Random().Next(0, 101),
+                CashOnHand =  new Random().Next(50000, 1000001)
+            };
 
+            var bankProperities = new List<int>{Suntrust.AlarmScore, Suntrust.VaultScore, Suntrust.SecurityGuardScore};
+            void ReconReport()
+            {
+                if (bankProperities.Max() == Suntrust.AlarmScore)
+                {
+                    Console.WriteLine("Most Secure: Alarm");
+                }
+                else if (bankProperities.Max() == Suntrust.VaultScore)
+                {
+                    Console.WriteLine("Most Secure: Vault");
+                }
+                else
+                {
+                    Console.WriteLine("Most Secure: SecurityGuard");
+                }
 
-
-
+                if (bankProperities.Min() == Suntrust.AlarmScore)
+                {
+                    Console.WriteLine("Least Secure: Alarm");
+                }
+                else if (bankProperities.Min() == Suntrust.VaultScore)
+                {
+                    Console.WriteLine("Least Secure: Vault");
+                }
+                else
+                {
+                    Console.WriteLine("Least Secure: SecurityGuard");
+                }
+            }
 
             Hacker Jon = new Hacker
             {
@@ -50,9 +84,9 @@ namespace Heist_II
             };
 
             List<IRobber> rolodex = new List<IRobber>
-         {
-             Jon, Dan, Kurt, Kim, Tim, Lars
-         };
+        {
+            Jon, Dan, Kurt, Kim, Tim, Lars
+        };
 
             HeistTime();
 
@@ -66,7 +100,7 @@ namespace Heist_II
                 Console.WriteLine(@"
                 1. Hacker
                 2. Muscle
-                3.Lock Specialist");
+                3. Lock Specialist");
 
                 var Specialty = int.Parse(Console.ReadLine());
 
@@ -122,7 +156,8 @@ namespace Heist_II
 
 
                 Console.WriteLine($"{rolodex.Count}");
-
+                Console.WriteLine($"{Suntrust.AlarmScore}");
+                ReconReport();
                 PlayAgain();
             }
             void PlayAgain()
@@ -138,7 +173,6 @@ namespace Heist_II
                 {
                     Console.WriteLine("Well you suck then");
                 }
-
             }
         }
     }
